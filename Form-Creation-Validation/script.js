@@ -12,13 +12,13 @@ document.addEventListener("DOMContentLoaded", function () {
         let isValid = true;
         let messages = [];
 
-        // Username Validation
+       
         if (username.length < 3) {
             isValid = false;
             messages.push("Username must be at least 3 characters long.");
         }
 
-        // Email Validation
+        
         if (!email.includes("@") || !email.includes(".")) {
             isValid = false;
             messages.push("Email must contain '@' and '.' characters.");
@@ -34,12 +34,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (isValid) {
             feedbackDiv.textContent = "Registration successful!";
-            feedbackDiv.style.color = "#28a745"; // Green color
-            feedbackDiv.style.backgroundColor = "#d4edda"; // Light green bg
+            feedbackDiv.style.color = "#28a745";
+            feedbackDiv.style.backgroundColor = "#d4edda"; 
         } else {
             feedbackDiv.innerHTML = messages.join("<br>");
-            feedbackDiv.style.color = "#dc3545"; // Red color
-            feedbackDiv.style.backgroundColor = "#ffbaba"; // Light red bg
+            feedbackDiv.style.color = "#dc3545"; 
+            feedbackDiv.style.backgroundColor = "#ffbaba"; 
         }
     });
 });
