@@ -8,7 +8,8 @@ function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <>
+      <>
+      <WelcomeMessage/>
       <div>
         <a href="https://vite.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
@@ -25,7 +26,6 @@ function App() {
         <p>
           Edit <code>src/App.jsx</code> and save to test HMR
         </p>
-          <WelcomeMessage/>
       </div>
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
