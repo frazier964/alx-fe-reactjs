@@ -15,6 +15,7 @@ function App() {
       <UserProfile name="John Smith" age="34" bio="City explorer and architecture lover." />
       <Footer/>
       <UserContext/>
+      "UserContext.Provider", "value"
     </div>
   );
 }
