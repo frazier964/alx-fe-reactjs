@@ -3,6 +3,9 @@ import Header from './components/Header';
 import MainContent from './components/MainContent';
 import Footer from './components/Footer';
 import UserProfile from './components/UserProfile';
+import Home from '../../my-company/Home';
+import Services from '../../my-company/Services';
+
 
 function App() {
   return (

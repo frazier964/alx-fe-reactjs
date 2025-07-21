@@ -5,8 +5,8 @@ import Header from './components/Header';
 import MainContent from './components/MainContent';
 import React from 'react';
 import Counter from './components/Counter';
-import UserContext from '../../alx-react-app-props/src/UserContext';
-import ProfilePage from '../../alx-react-app-props/src/ProfilePage';
+import UserContext from '../../alx-react-app-props/src/components/UserContext';
+import ProfilePage from '../../alx-react-app-props/src/components/ProfilePage';
 
 function App() {
   return (
