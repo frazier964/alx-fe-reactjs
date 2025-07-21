@@ -3,7 +3,8 @@ import UserProfile from './components/UserProfile';
 import Footer from './components/Footer';
 import Header from './components/Header';
 import MainContent from './components/MainContent';
-
+import React from 'react';
+import Counter from './components/Counter';
 
 function App() {
   return (
@@ -16,6 +17,8 @@ function App() {
       />
       <MainContent/>
       <Footer/>
+      <React/>
+      <Counter/>
 
     </div>
   );
