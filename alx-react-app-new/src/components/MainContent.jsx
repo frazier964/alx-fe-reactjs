@@ -14,7 +14,7 @@ function MainContent() {
     <main style={mainStyle}>
       <h2 style={{ textAlign: 'center', color: '#333' }}>Explore These Amazing Cities</h2>
       <p>
-        From the bustling streets of Tokyo to the charming canals of Venice, cities around the world offer rich culture, amazing food, and unforgettable experiences. Discover what makes each one unique.
+      "I love to visit New York, Paris, and Tokyo."
       </p>
     </main>
   );
