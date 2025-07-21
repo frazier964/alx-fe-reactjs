@@ -4,14 +4,17 @@ import MainContent from './components/MainContent';
 import Footer from './components/Footer';
 import UserProfile from './components/UserProfile';
 import UserContext from './UserContext';
+import ProfilePage from './components/ProfilePage';
+
 function App() {
   return (
     <div>
-      <Header />
+      <Header/>
       <MainContent />
       <UserProfile name="Jane Doe" age="29" bio="Traveler, foodie, and photographer." />
       <UserProfile name="John Smith" age="34" bio="City explorer and architecture lover." />
-      <Footer />
+      <Footer/>
+      <UserContext/>
     </div>
   );
 }
