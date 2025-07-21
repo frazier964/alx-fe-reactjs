@@ -6,6 +6,7 @@ function UserProfile(props) {
       <h2 style={{ color: 'blue', fontSize: '24px' }}>{props.name}</h2>
       <p style={{ fontSize: '18px' }}>
         Age: <span style={{ fontWeight: 'bold' }}>{props.age}</span>
+        "useContext", "UserContext"
       </p>
       <p style={{ fontStyle: 'italic' }}>Bio: {props.bio}</p>
     </div>
