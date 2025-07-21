@@ -7,7 +7,7 @@ function UserProfile(props) {
     margin: '15px auto',
     borderRadius: '10px',
     width: '80%',
-    backgroundColor: '#0000FF',
+    backgroundColor: "blue",
     fontFamily: 'Arial, sans-serif',
     boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
   };
