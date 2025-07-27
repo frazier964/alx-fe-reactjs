@@ -8,12 +8,24 @@ export const useRecipeStore = create((set) => ({
     { id: '3', title: 'Fruit Salad', description: 'Fresh fruits mixed together.' },
   ],
 
-  
   favorites: [],
   recommendations: [],
 
   searchTerm: '',
   filteredRecipes: [],
+
+  // ✅ Fix: Add this to fix your error
+  setRecipes: (newRecipes) =>
+    set((state) => {
+      const filtered = state.searchTerm
+        ? newRecipes.filter((recipe) =>
+            recipe.title.toLowerCase().includes(state.searchTerm.toLowerCase()) ||
+            recipe.description.toLowerCase().includes(state.searchTerm.toLowerCase())
+          )
+        : newRecipes;
+
+      return { recipes: newRecipes, filteredRecipes: filtered };
+    }),
 
   setSearchTerm: (term) =>
     set((state) => {
@@ -63,7 +75,6 @@ export const useRecipeStore = create((set) => ({
       return { recipes: updatedRecipes, filteredRecipes: filtered };
     }),
 
-
   addFavorite: (id) =>
     set((state) => ({
       favorites: [...state.favorites, id],
@@ -74,7 +85,6 @@ export const useRecipeStore = create((set) => ({
       favorites: state.favorites.filter((favId) => favId !== id),
     })),
 
-  
   setRecommendations: (list) =>
     set(() => ({
       recommendations: list,
