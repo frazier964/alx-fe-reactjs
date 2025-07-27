@@ -8,6 +8,10 @@ export const useRecipeStore = create((set) => ({
     { id: '3', title: 'Fruit Salad', description: 'Fresh fruits mixed together.' },
   ],
 
+  
+  favorites: [],
+  recommendations: [],
+
   searchTerm: '',
   filteredRecipes: [],
 
@@ -58,4 +62,21 @@ export const useRecipeStore = create((set) => ({
         : updatedRecipes;
       return { recipes: updatedRecipes, filteredRecipes: filtered };
     }),
+
+
+  addFavorite: (id) =>
+    set((state) => ({
+      favorites: [...state.favorites, id],
+    })),
+
+  removeFavorite: (id) =>
+    set((state) => ({
+      favorites: state.favorites.filter((favId) => favId !== id),
+    })),
+
+  
+  setRecommendations: (list) =>
+    set(() => ({
+      recommendations: list,
+    })),
 }));
