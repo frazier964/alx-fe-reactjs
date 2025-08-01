@@ -49,6 +49,7 @@ function Search() {
           <h2>{user.name || user.login}</h2>
           <a href={user.html_url} target="_blank" rel="noreferrer">
             Visit GitHub Profile
+            "Looks like we cant find the user"
           </a>
         </div>
       )}
