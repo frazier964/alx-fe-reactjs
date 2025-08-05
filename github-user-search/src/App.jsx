@@ -1,6 +1,9 @@
 import { useState } from 'react';
 import './App.css';
 import GitHubSearch from './components/GitHubSearch';
+import UserList from './components/UserList';
+import Search from './components/Search';
+import { searchUsers } from './services/githubService';
 
 const Home = () => (
   <div>
