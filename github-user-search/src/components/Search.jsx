@@ -1,96 +1,69 @@
-import { useState } from 'react';
-import { searchUsers } from '../services/githubService';
-import { fetchUserData } from '../services/githubService';
+// src/components/Search.jsx
+import React, { useState } from 'react';
 
-function Search() {
+const Search = ({ onSearch }) => {
   const [username, setUsername] = useState('');
   const [location, setLocation] = useState('');
   const [minRepos, setMinRepos] = useState('');
-  const [results, setResults] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setLoading(true);
-    setError('');
-    setResults([]);
-
-    try {
-      const queryParts = [];
-
-      if (username) queryParts.push(`${username} in:login`);
-      if (location) queryParts.push(`location:${location}`);
-      if (minRepos) queryParts.push(`repos:>=${minRepos}`);
-
-      const query = queryParts.join(' ');
-      //const data = await searchUsers(query);
-      const data = await fetchUserData(username)
-      setResults(data.items || []);
-    } catch (err) {
-      setError("Looks like we cant find the user.");
-    } finally {
-      setLoading(false);
-    }
+    onSearch({ username, location, minRepos });
   };
 
   return (
-    <div style={{ padding: '1rem' }}>
-      <form onSubmit={handleSubmit}>
+    <form
+      onSubmit={handleSubmit}
+      className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 max-w-2xl mx-auto mt-8 space-y-4"
+    >
+      <h2 className="text-2xl font-semibold text-center mb-4">GitHub Advanced User Search</h2>
+
+      <div>
+        <label htmlFor="username" className="block text-gray-700 font-bold mb-2">Username</label>
         <input
+          id="username"
           type="text"
-          placeholder="Username"
+          placeholder="e.g., dan"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-          style={{ padding: '0.5rem', marginRight: '0.5rem' }}
+          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
+      </div>
+
+      <div>
+        <label htmlFor="location" className="block text-gray-700 font-bold mb-2">Location</label>
         <input
+          id="location"
           type="text"
-          placeholder="Location"
+          placeholder="e.g., Kenya"
           value={location}
           onChange={(e) => setLocation(e.target.value)}
-          style={{ padding: '0.5rem', marginRight: '0.5rem' }}
+          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
+      </div>
+
+      <div>
+        <label htmlFor="minRepos" className="block text-gray-700 font-bold mb-2">Minimum Repositories</label>
         <input
+          id="minRepos"
           type="number"
-          placeholder="Min Repos"
+          min="0"
           value={minRepos}
           onChange={(e) => setMinRepos(e.target.value)}
-          style={{ padding: '0.5rem', marginRight: '0.5rem', width: '100px' }}
+          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
-        <button type="submit" style={{ padding: '0.5rem' }}>
+      </div>
+
+      <div className="flex justify-center">
+        <button
+          type="submit"
+          className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
           Search
         </button>
-      </form>
-
-      {loading && <p>Loading...</p>}
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-
-      <div style={{ marginTop: '1rem' }}>
-        {results.map((user) => (
-          <div
-            key={user.id}
-            style={{
-              border: '1px solid #ccc',
-              padding: '1rem',
-              marginBottom: '1rem',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '1rem',
-            }}
-          >
-            <img src={user.avatar_url} alt="avatar" width="80" height="80" />
-            <div>
-              <h3>{user.login}</h3>
-              <a href={user.html_url} target="_blank" rel="noreferrer">
-                Visit GitHub Profile
-              </a>
-            </div>
-          </div>
-        ))}
       </div>
-    </div>
+    </form>
   );
-}
+};
 
 export default Search;

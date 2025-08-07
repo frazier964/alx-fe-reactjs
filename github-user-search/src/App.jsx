@@ -1,9 +1,8 @@
 import { useState } from 'react';
 import './App.css';
+import "./index.css"
 import GitHubSearch from './components/GitHubSearch';
-import UserList from './components/UserList';
-import Search from './components/Search';
-import { searchUsers } from './services/githubService';
+
 
 const Home = () => (
   <div>
@@ -28,6 +27,7 @@ const Contact = () => (
 
 function App() {
   const [currentRoute, setCurrentRoute] = useState('home');
+  const [users, setUsers] = useState([]); // Added missing users state
 
   const renderPage = () => {
     switch (currentRoute) {
@@ -44,27 +44,49 @@ function App() {
     }
   };
 
+
   return (
     <div className="app">
       <header className="header">
         <h1>My React Application</h1>
         <nav className="navigation">
-          <button onClick={() => setCurrentRoute('home')} className={currentRoute === 'home' ? 'active' : ''}>Home</button>
-          <button onClick={() => setCurrentRoute('about')} className={currentRoute === 'about' ? 'active' : ''}>About</button>
-          <button onClick={() => setCurrentRoute('contact')} className={currentRoute === 'contact' ? 'active' : ''}>Contact</button>
-          <button onClick={() => setCurrentRoute('search')} className={currentRoute === 'search' ? 'active' : ''}>GitHub Search</button>
+          <button 
+            onClick={() => setCurrentRoute('home')} 
+            className={currentRoute === 'home' ? 'active' : ''}
+          >
+            Home
+          </button>
+          <button 
+            onClick={() => setCurrentRoute('about')} 
+            className={currentRoute === 'about' ? 'active' : ''}
+          >
+            About
+          </button>
+          <button 
+            onClick={() => setCurrentRoute('contact')} 
+            className={currentRoute === 'contact' ? 'active' : ''}
+          >
+            Contact
+          </button>
+          <button 
+            onClick={() => setCurrentRoute('search')} 
+            className={currentRoute === 'search' ? 'active' : ''}
+          >
+            GitHub Search
+          </button>
         </nav>
       </header>
-
       <main className="main-content">
         {renderPage()}
       </main>
-
       <footer className="footer">
         <p>&copy; 2024 My React Application. All rights reserved.</p>
       </footer>
     </div>
   );
 }
+
+
+
 
 export default App;
