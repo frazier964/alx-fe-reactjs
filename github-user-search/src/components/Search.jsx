@@ -1,69 +1,107 @@
-// src/components/Search.jsx
-import React, { useState } from 'react';
+import { useState } from 'react';
+import { searchUsers } from '../services/githubService.js';
+import '../index.css';
 
-const Search = ({ onSearch }) => {
+function GitHubSearch() {
   const [username, setUsername] = useState('');
   const [location, setLocation] = useState('');
   const [minRepos, setMinRepos] = useState('');
+  const [users, setUsers] = useState([]); // changed from user -> users
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSearch = async (e) => {
     e.preventDefault();
-    onSearch({ username, location, minRepos });
+    if (!username) return;
+
+    setLoading(true);
+    setError(false);
+    setUsers([]); // clear previous users
+
+    try {
+      const data = await searchUsers({ username, location, minRepos });
+      setUsers(data || []); // Ensure compatibility with GitHub API structure
+    } catch {
+      setError(true);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 max-w-2xl mx-auto mt-8 space-y-4"
-    >
-      <h2 className="text-2xl font-semibold text-center mb-4">GitHub Advanced User Search</h2>
+    <div className="p-6">
+      <h2 className="text-3xl font-semibold mb-6 text-center text-gray-800">GitHub User Search</h2>
 
-      <div>
-        <label htmlFor="username" className="block text-gray-700 font-bold mb-2">Username</label>
+      <form
+        onSubmit={handleSearch}
+        className="flex flex-col gap-4 bg-white p-6 rounded-lg shadow-md max-w-2xl mx-auto"
+      >
         <input
-          id="username"
           type="text"
-          placeholder="e.g., dan"
+          placeholder="GitHub username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          required
+          className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
-      </div>
 
-      <div>
-        <label htmlFor="location" className="block text-gray-700 font-bold mb-2">Location</label>
         <input
-          id="location"
           type="text"
-          placeholder="e.g., Kenya"
+          placeholder="Location (optional)"
           value={location}
           onChange={(e) => setLocation(e.target.value)}
-          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
-      </div>
 
-      <div>
-        <label htmlFor="minRepos" className="block text-gray-700 font-bold mb-2">Minimum Repositories</label>
         <input
-          id="minRepos"
           type="number"
-          min="0"
+          placeholder="Minimum Repositories (optional)"
           value={minRepos}
           onChange={(e) => setMinRepos(e.target.value)}
-          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          min={0}
         />
-      </div>
 
-      <div className="flex justify-center">
         <button
           type="submit"
-          className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full sm:w-auto bg-blue-600 text-black font-semibold py-2 px-6 rounded-md hover:bg-blue-700 transition duration-200"
         >
           Search
         </button>
-      </div>
-    </form>
-  );
-};
+      </form>
 
-export default Search;
+      {loading && <p className="text-center text-blue-600 mt-4">Loading...</p>}
+      {error && <p className="text-center text-red-600 mt-4">User not found or API error.</p>}
+
+      {users.length > 0 && (
+        <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-4xl mx-auto">
+          {users.map((user) => (
+            <div
+              key={user.id}
+              className="bg-gray-100 p-4 rounded-lg shadow hover:shadow-md transition duration-200"
+            >
+              <img
+                src={user.avatar_url}
+                alt="Avatar"
+                className="w-20 h-20 rounded-full mx-auto mb-3"
+              />
+              <h3 className="text-lg font-semibold text-center">{user.login}</h3>
+              <div className="text-center mt-2">
+                <a
+                  href={user.html_url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-blue-600 hover:underline"
+                >
+                  Visit GitHub Profile
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+export default GitHubSearch;
