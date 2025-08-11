@@ -3,6 +3,7 @@ import Navbar from "./components/Navbar";
 import HomePage from "./components/HomePage";
 import RecipeDetail from "./components/RecipeDetail";
 import AddRecipe from "./pages/AddRecipe";
+import AddRecipeForm from "./components/AddRecipeForm";
 
 export default function App() {
   return (
