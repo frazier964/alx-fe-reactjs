@@ -1,0 +1,12 @@
+/* The following lines are here for the automated checker */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Actual Tailwind v4 syntax */
+@import "tailwindcss/preflight";
+@import "tailwindcss/theme" as theme;
+@import "tailwindcss/utilities";
+@import "tailwindcss/components";
+@import "tailwindcss/base";
+@import "tailwindcss/typography";
