@@ -8,7 +8,6 @@ export default function RecipeDetail() {
   const [recipe, setRecipe] = useState(null);
 
   useEffect(() => {
-    // Simulate fetching recipe details (with ingredients & instructions)
     const foundRecipe = recipesData.find((r) => r.id === parseInt(id));
     if (foundRecipe) {
       setRecipe({
@@ -24,7 +23,7 @@ export default function RecipeDetail() {
   }
 
   return (
-    <div className="max-w-2xl mx-auto">
+    <div className="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-lg">
       <img
         src={recipe.image}
         alt={recipe.title}
