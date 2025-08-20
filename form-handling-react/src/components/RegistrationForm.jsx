@@ -1,34 +1,23 @@
 import React, { useState } from "react";
 
 const RegistrationForm = () => {
-  const [formData, setFormData] = useState({
-    username: "",
-    email: "",
-    password: "",
-  });
-
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Basic validation
-    if (!formData.username || !formData.email || !formData.password) {
+    if (!username || !email || !password) {
       setError("All fields are required.");
       return;
     }
-
     setError("");
 
-    // Simulate API call
+    const formData = { username, email, password };
+
     try {
       const response = await fetch("https://jsonplaceholder.typicode.com/users", {
         method: "POST",
@@ -52,8 +41,8 @@ const RegistrationForm = () => {
         type="text"
         name="username"
         placeholder="Username"
-        value={formData.username}
-        onChange={handleChange}
+        value={username}     {/* ✅ now directly using username */}
+        onChange={(e) => setUsername(e.target.value)}
         className="border p-2 w-full mb-2"
       />
 
@@ -61,8 +50,8 @@ const RegistrationForm = () => {
         type="email"
         name="email"
         placeholder="Email"
-        value={formData.email}
-        onChange={handleChange}
+        value={email}        {/* ✅ now directly using email */}
+        onChange={(e) => setEmail(e.target.value)}
         className="border p-2 w-full mb-2"
       />
 
@@ -70,8 +59,8 @@ const RegistrationForm = () => {
         type="password"
         name="password"
         placeholder="Password"
-        value={formData.password}
-        onChange={handleChange}
+        value={password}     {/* ✅ now directly using password */}
+        onChange={(e) => setPassword(e.target.value)}
         className="border p-2 w-full mb-2"
       />
 
