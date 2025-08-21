@@ -1,56 +1,55 @@
-import { useState } from "react";
-import AddTodoForm from "./AddTodoForm";
+import React, { useState } from "react";
 
-export default function TodoList() {
-  const [todos, setTodos] = useState([
-    { id: 1, text: "Learn React", completed: false },
-    { id: 2, text: "Build a Todo App", completed: true },
-  ]);
+const TodoList = () => {
+  const [todos, setTodos] = useState([]);
+  const [task, setTask] = useState("");
 
-  const addTodo = (text) => {
-    const newTodo = { id: Date.now(), text, completed: false };
-    setTodos([...todos, newTodo]);
+  const handleAddTodo = () => {
+    if (task.trim() === "") return;
+    setTodos([...todos, { text: task, completed: false }]);
+    setTask("");
   };
 
-  const toggleTodo = (id) => {
-    setTodos(
-      todos.map((todo) =>
-        todo.id === id ? { ...todo, completed: !todo.completed } : todo
-      )
-    );
+  const handleToggleTodo = (index) => {
+    const updatedTodos = [...todos];
+    updatedTodos[index].completed = !updatedTodos[index].completed;
+    setTodos(updatedTodos);
   };
 
-  const deleteTodo = (id) => {
-    setTodos(todos.filter((todo) => todo.id !== id));
+  const handleDeleteTodo = (index) => {
+    const updatedTodos = [...todos];
+    updatedTodos.splice(index, 1);
+    setTodos(updatedTodos);
   };
 
   return (
     <div>
-      <h1>Todo List</h1>
-      <AddTodoForm onAdd={addTodo} />
+      <h2>Todo List</h2>
+      <input
+        type="text"
+        value={task}
+        onChange={(e) => setTask(e.target.value)}
+        placeholder="Enter a new task"
+      />
+      <button onClick={handleAddTodo}>Add Task</button>
+
       <ul>
-        {todos.map((todo) => (
+        {todos.map((todo, index) => (
           <li
-            key={todo.id}
-            onClick={() => toggleTodo(todo.id)}
+            key={index}
+            onClick={() => handleToggleTodo(index)}
             style={{
-              textDecoration: todo.completed ? "line-through" : "none",
               cursor: "pointer",
+              textDecoration: todo.completed ? "line-through" : "none",
             }}
           >
             {todo.text}
-            <button
-              onClick={(e) => {
-                e.stopPropagation(); // prevent toggle when deleting
-                deleteTodo(todo.id);
-              }}
-              style={{ marginLeft: "10px" }}
-            >
-              Delete
-            </button>
+            <button onClick={() => handleDeleteTodo(index)}>Delete</button>
           </li>
         ))}
       </ul>
     </div>
   );
-}
+};
+
+export default TodoList;
