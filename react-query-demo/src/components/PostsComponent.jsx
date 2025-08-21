@@ -15,6 +15,8 @@ function PostsComponent() {
 
   return (
     <div>
+        isError
+        fetchPosts
       <h2>Posts</h2>
       <ul>
         {data.map(post => (
