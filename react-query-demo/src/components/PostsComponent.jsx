@@ -21,6 +21,8 @@ function PostsComponent() {
         staleTime
         refetchOnWindowFocus
         keepPreviousData
+        button
+        onClick
       <h2>Posts</h2>
       <ul>
         {data.map(post => (
