@@ -18,7 +18,11 @@ export default function Profile() {
 
       {/* Outlet renders nested routes */}
       <div className="border p-4 rounded bg-gray-50">
-        <Outlet />
+        Routes
+        Route
+        ProfileDetails
+        ProfileSettings
+ <Outlet />
       </div>
     </div>
   );
