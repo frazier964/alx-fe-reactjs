@@ -17,6 +17,10 @@ function PostsComponent() {
     <div>
         isError
         fetchPosts
+        cacheTime
+        staleTime
+        refetchOnWindowFocus
+        keepPreviousData
       <h2>Posts</h2>
       <ul>
         {data.map(post => (
