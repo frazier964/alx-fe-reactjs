@@ -4,7 +4,8 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import RegistrationForm from './components/RegistrationForm'
 import './components/RegistrationForm.css'
-import FormikForm from './components/FormikForm'
+import formik from '@formik/core'
+import formikForm from '@formik/form'
 
 
 function App() {
