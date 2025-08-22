@@ -45,7 +45,14 @@ const TodoList = () => {
             }}
           >
             {todo.text}
-            <button onClick={() => handleDeleteTodo(index)}>Delete</button>
+            <button
+              onClick={(e) => {
+                e.stopPropagation(); // ✅ prevents bubbling
+                handleDeleteTodo(index);
+              }}
+            >
+              Delete
+            </button>
           </li>
         ))}
       </ul>
