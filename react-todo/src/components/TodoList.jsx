@@ -29,15 +29,16 @@ const TodoList = () => {
         type="text"
         value={task}
         onChange={(e) => setTask(e.target.value)}
-        placeholder="Enter a new task"
+        placeholder="Add a new task"
       />
-      <button onClick={handleAddTodo}>Add Task</button>
+      <button onClick={handleAddTodo}>Add</button>
 
       <ul>
         {todos.map((todo, index) => (
           <li
             key={index}
             onClick={() => handleToggleTodo(index)}
+            className={todo.completed ? "completed" : ""}
             style={{
               cursor: "pointer",
               textDecoration: todo.completed ? "line-through" : "none",
